@@ -1,0 +1,28 @@
+*{
+    background-color: black;
+}
+
+
+.login > img{
+    width:70%;
+}
+
+
+.link{
+    background-color:#1db954;
+    color: aliceblue;
+   padding: 20px;
+   border-radius: 500px;
+   font-weight: 800;
+    cursor: pointer;
+   display:block;
+   text-align: center;
+   font: bolder;
+}
+
+.link:hover{
+    font-size: large;
+    background-color:#11E65C;  
+    color: aliceblue;
+}
+
