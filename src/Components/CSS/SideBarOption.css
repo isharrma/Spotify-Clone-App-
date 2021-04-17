@@ -1,0 +1,18 @@
+.sidebarOption {
+    color: #909090;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transform: 300ms color ease-in ;
+}
+
+.sidebarOption:hover{
+    color: aliceblue;
+}
+
+.sidebarOption_icon{
+    padding-right: 5px;
+    
+
+}

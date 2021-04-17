@@ -1,50 +1,60 @@
 import React, {useEffect, useState} from 'react'
 import SpotifyWebApi from "spotify-web-api-js";
 
-
 import  Login from "./Components/Login.js" 
 import  Player from "./Components/Player"
 import { getTokenFromURL } from "./Components/spotify"
+ import { useDataLayer } from "./Components/DataLayer" 
 
-import {Container ,Col,Row } from "reactstrap"
+import {Container} from "reactstrap"
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+
 
 
 const spotify = new SpotifyWebApi();
 
 function App() {
-  const [token,setToken] = useState(null);   // state for storing the token from Spotify
+  const [{ user, token },dispatch] = useDataLayer();  // Using the Context API for state management
 
   // Load the page according to the token
   useEffect( ()=>{
 
     const hash = getTokenFromURL();
 
-    window.location.hash = "";
+    window.location.hash = "";  //Setting the URL to empty to keep the token hidden
     const _token = hash.access_token;
 
     if(_token){
-      setToken(_token);
-      spotify.setAccessToken(_token);
 
-      spotify.getMe().then( user =>{
-        console.log("User is >>",user );
+      dispatch({
+        type: 'SET_TOKEN',
+        token: _token,
       })
+
+      spotify.setAccessToken(_token);
+      spotify.getMe().then( user =>{
+
+        dispatch({
+          type: 'SET_USER',
+          user: user,
+        });
+
+      });
     }
+ 
 
-    
-
-    console.log("I have a token 👉",token);
   },[])
 
+
   return (
-    <Container fluid>
+    <Container fluid className="app">
 
       {/* Conditinal Rendering */}
+
       {
         token ? (
-          <Player />
+          <Player spotify={spotify}/>
         ):(
           <Login />
         )

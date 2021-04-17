@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Login() {
     return (
-        <Container fluid>
+        <div className="login">
         <Row xs="4">
             <Col >
             <img src="https://getheavy.com/wp-content/uploads/2019/12/spotify2019-830x350.jpg" alt=""></img>
@@ -28,6 +28,6 @@ export default function Login() {
             </Col>     
         </Row>
           
-    </Container>
+    </div>
     )
 }
