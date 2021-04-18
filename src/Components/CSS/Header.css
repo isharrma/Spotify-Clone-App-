@@ -1,0 +1,19 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:30px ;
+}
+
+.header-left{
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+}
+
+.search_box{
+    color: #E0E0E0;
+}
+
+.header-right{
+    display: flex;
+}

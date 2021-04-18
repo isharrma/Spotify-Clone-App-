@@ -13,7 +13,7 @@ export default function Player( {spotify}) {
        <div className="player">
            <div className="player_body">
                   <SideBar />
-                  <Body />
+                  <Body spotify={spotify}/>
            </div>
 
             <Footer />
