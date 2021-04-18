@@ -6,17 +6,16 @@ import  Player from "./Components/Player"
 import { getTokenFromURL } from "./Components/spotify"
  import { useDataLayer } from "./Components/DataLayer" 
 
-import {Container} from "reactstrap"
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { DriveEtaTwoTone } from '@material-ui/icons';
+
 
 
 
 const spotify = new SpotifyWebApi();
 
 function App() {
-  const [{ user, token , playlists },dispatch] = useDataLayer();  // Using the Context API for state management
+  const [{  token  },dispatch] = useDataLayer();  // Using the Context API for state management
 
   // Load the page according to the token
   useEffect( ()=>{
@@ -47,6 +46,13 @@ function App() {
             playlists: playlist,
           })
         })
+
+        spotify.getPlaylist('37i9dQZEVXcDgIvhK73VG4').then(response => {
+          dispatch({
+            type: "SET_DISCOVER_WEEKLY",
+            discover_weekly:response,
+          });
+        });
 
       });
     }
