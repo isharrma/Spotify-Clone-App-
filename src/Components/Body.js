@@ -12,6 +12,44 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 export default function Body({spotify}) {
 
   const [{ discover_weekly },dispatch] = useDataLayer();
+
+  const playPlaylist = (id) => {
+    spotify.play({
+      context_uri: 'spotify:playlist:37i9dQZEVXcDgIvhK73VG4',
+    }).then((r) => {
+      spotify.getMyCurrentlyPlayingTrack().then((response) =>{
+        dispatch({
+          type: "SET_ITEM",
+          item: response.item,
+        });
+        dispatch({
+          
+          type: "SET_PLAYING",
+          playing: true,
+        });
+      })
+    })
+  }
+
+  const playSong = (id) => {
+    spotify
+      .play({
+        uris: [`spotify:track:${id}`],
+      })
+      .then((res) => {
+        spotify.getMyCurrentPlayingTrack().then((r) => {
+          dispatch({
+            type: "SET_ITEM",
+            item: r.item,
+          });
+          dispatch({
+            type: "SET_PLAYING",
+            playing: true,
+          });
+        });
+      });
+  };
+  
     return (
       <div className="body">
           <Header spotify={spotify}/>
@@ -28,13 +66,13 @@ export default function Body({spotify}) {
           
           <div className="body_songs">
             <div className="body_icons">
-              <PlayCircleFilled className="body_shuffle"/>
+              <PlayCircleFilled className="body_shuffle" onClick={playPlaylist}/>
               <FavoriteIcon fontSize="large" className="bodyIcons"/>
               <MoreHorizIcon className="bodyIcons"/>
             </div>
 
             {discover_weekly?.tracks.items.map((item) => (
-            <SongRow  track={item.track} />
+            <SongRow  playSong={playSong} track={item.track} />
         ))}
 
           </div>
