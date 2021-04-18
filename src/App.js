@@ -9,13 +9,14 @@ import { getTokenFromURL } from "./Components/spotify"
 import {Container} from "reactstrap"
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+import { DriveEtaTwoTone } from '@material-ui/icons';
 
 
 
 const spotify = new SpotifyWebApi();
 
 function App() {
-  const [{ user, token },dispatch] = useDataLayer();  // Using the Context API for state management
+  const [{ user, token , playlists },dispatch] = useDataLayer();  // Using the Context API for state management
 
   // Load the page according to the token
   useEffect( ()=>{
@@ -40,6 +41,13 @@ function App() {
           user: user,
         });
 
+        spotify.getUserPlaylists().then( playlist => {
+          dispatch({
+            type: 'SET_PLAYLISTS',
+            playlists: playlist,
+          })
+        })
+
       });
     }
  
@@ -48,7 +56,7 @@ function App() {
 
 
   return (
-    <Container fluid className="app">
+    <div className="app">
 
       {/* Conditinal Rendering */}
 
@@ -59,8 +67,7 @@ function App() {
           <Login />
         )
       }
-    </Container>
-
+    </div>
   );
 }
 

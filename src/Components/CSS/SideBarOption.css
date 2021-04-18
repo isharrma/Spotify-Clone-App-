@@ -5,6 +5,8 @@
     align-items: center;
     cursor: pointer;
     transform: 300ms color ease-in ;
+    padding-top: 4px;
+    padding-left: 14px;
 }
 
 .sidebarOption:hover{
@@ -13,6 +15,12 @@
 
 .sidebarOption_icon{
     padding-right: 5px;
+    padding-left: 5 px;
+    height : 10px;
     
 
+}
+
+h6{
+    padding-left: 15px;
 }
