@@ -72,7 +72,7 @@ export default function Body({spotify}) {
             </div>
 
             {discover_weekly?.tracks.items.map((item) => (
-            <SongRow  playSong={playSong} track={item.track} />
+            <SongRow  playSong={playSong} track={item} />
         ))}
 
           </div>

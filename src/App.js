@@ -28,31 +28,31 @@ function App() {
     if (_token) {
       spotify.setAccessToken(_token);
 
-      dispatch({
+      dispatch({                          //Setting token 
         type: "SET_TOKEN",
         token: _token,
       });
 
-      spotify.getPlaylist("37i9dQZEVXcDgIvhK73VG4").then((response) =>
+      spotify.getPlaylist("37i9dQZEVXcDgIvhK73VG4").then((response) =>       //Setting Discover Weekly
         dispatch({
           type: "SET_DISCOVER_WEEKLY",
           discover_weekly: response,
         })
       );
 
-      spotify.getMyTopArtists().then((response) =>
+      spotify.getMyTopArtists().then((response) =>         //Setting top artist
         dispatch({
           type: "SET_TOP_ARTISTS",
           top_artists: response,
         })
       );
 
-      dispatch({
+      dispatch({                                     //Setting your spotify information
         type: "SET_SPOTIFY",
         spotify: spotify,
       });
 
-      spotify.getMe().then((user) => {
+      spotify.getMe().then((user) => {           //Setting user
         dispatch({
           type: "SET_USER",
           user,
